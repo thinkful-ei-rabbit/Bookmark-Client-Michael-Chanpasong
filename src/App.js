@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import AddBookmark from './AddBookmark/AddBookmark';
+import EditBookmark from './EditBookmark/EditBookmark';
 import BookmarkList from './BookmarkList/BookmarkList';
 import BookmarksContext from './BookmarksContext';
 import Nav from './Nav/Nav';
@@ -36,6 +37,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    //console.log(config.API_KEY)
     fetch(config.API_ENDPOINT, {
       method: 'GET',
       headers: {
@@ -71,6 +73,10 @@ class App extends Component {
             <Route
               path='/add-bookmark'
               component={AddBookmark}
+            />
+            <Route
+              path='/edit-bookmark/:bookmark_id'
+              component={EditBookmark}
             />
             <Route
               exact
