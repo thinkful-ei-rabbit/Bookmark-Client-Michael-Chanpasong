@@ -36,6 +36,22 @@ class App extends Component {
     })
   }
 
+  updateBookmark = (bookmarkData) => {
+    console.log(bookmarkData);
+    //console.log(bookmarkId);
+    this.setState({
+      bookmarks: this.state.bookmarks.map(
+        bookmark => {
+          if(bookmark.id !== Number(bookmarkData.id)) return bookmark;
+
+          return {
+            ...bookmark,
+            ...bookmarkData
+          };
+        })
+    })
+  }
+
   componentDidMount() {
     //console.log(config.API_KEY)
     fetch(config.API_ENDPOINT, {
@@ -63,6 +79,8 @@ class App extends Component {
       bookmarks: this.state.bookmarks,
       addBookmark: this.addBookmark,
       deleteBookmark: this.deleteBookmark,
+      updateBookmark: this.updateBookmark
+      
     }
     return (
       <main className='App'>
@@ -75,7 +93,7 @@ class App extends Component {
               component={AddBookmark}
             />
             <Route
-              path='/edit-bookmark/:bookmark_id'
+              path='/edit-bookmark/:bookmarkId'
               component={EditBookmark}
             />
             <Route
